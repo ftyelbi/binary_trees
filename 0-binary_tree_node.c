@@ -5,7 +5,7 @@
  *
  * @parent: pointer to the parent node of the node to create.
  *@value: value to put in the new node.
- * Return: function must return a pointer to the new node or NULL if no.
+ * Return: function must return pointer to the new node or NULL if no.
  */
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
 {
@@ -17,6 +17,6 @@ binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
 	node->parent = parent;
 	node->left = NULL;
 	node->right = NULL;
-	
+
 	return (node);
 }
