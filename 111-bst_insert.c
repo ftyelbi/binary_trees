@@ -9,7 +9,7 @@ bst_t *bst_insert(bst_t **tree, int value)
 {
 	bst_t *aux = NULL;
 
-	if (!tree)
+	if (tree == NULL)
 		return (NULL);
 	if (*tree == NULL)
 	{
@@ -36,4 +36,4 @@ bst_t *bst_insert(bst_t **tree, int value)
 		return (bst_insert(&(aux->right), value));
 	}
 	return (NULL);
-}i
+}
