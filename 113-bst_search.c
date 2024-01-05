@@ -1,20 +1,33 @@
 #include "binary_trees.h"
-/**
- * bst_search -function find node in a tree
- * @tree: root of the tre to evaluate
- * @value: node to find
- * Return: 1 if exits 0 if no
- */
-bst_t *bst_search(const bst_t *tree, int value)
-{
 
+/**
+ * binary_tree_is_leaf -  a function that checks if a node is a leaf.
+ *@node: is a pointer to the node to check.
+ * Return: return 1 if node is a leaf, otherwise 0.
+ */
+int binary_tree_is_leaf(const binary_tree_t *node)
+{
+	if (!node)
+		return (0);
+
+	if (node->left == NULL && node->right == NULL)
+		return (1);
+	else
+		return (0);
+}
+
+/**
+ * binary_tree_leaves - number of leaves
+ *@tree: pointer to the root node of the tree to count the number of leaves.
+ * Return: If tree is NULL, the function must return 0.
+ */
+size_t binary_tree_leaves(const binary_tree_t *tree)
+{
 	if (!tree)
 		return (0);
-	if (value == tree->n)
-		return ((bst_t *)tree);
-	if (value < tree->n)
-		return (bst_search(tree->left, value));
 	else
-		return (bst_search(tree->right, value));
-	return (0);
+		return (binary_tree_is_leaf(tree) +
+			binary_tree_leaves(tree->left) +
+			binary_tree_leaves(tree->right));
+
 }
