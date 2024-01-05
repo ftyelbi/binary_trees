@@ -1,81 +1,102 @@
-#include <stdlib.h>
 #include "binary_trees.h"
 
-/**
- * binary_tree_enqueue - Enqueues a node in a binary tree
- *			level order traversal
- * @queue: Pointer to the queue
- * @node: Node to enqueue
- *
- * Return: New queue
- */
-binary_tree_t **binary_tree_enqueue(binary_tree_t **queue, binary_tree_t *node)
-{
-	size_t i, count;
-	binary_tree_t **new_queue;
-
-	if (queue == NULL)
-	return (NULL);
-
-	count = 0;
-	while (queue[count])
-	count++;
-
-	new_queue = malloc((count + 2) * sizeof(binary_tree_t *));
-	if (new_queue == NULL)
-	return (NULL);
-
-	for
-	(i = 0; i < count; i++)
-        new_queue[i] = queue[i];
-
-	new_queue[count] = node;
-	new_queue[count + 1] = NULL;
-
-	free(queue);
-	return (new_queue);
-}
+ll *append(ll *head, const binary_tree_t *btnode);
+void free_list(ll *head);
+ll *get_children(ll *head, const binary_tree_t *parent);
+void levels_rec(ll *head, void (*func)(int));
 
 /**
- * binary_tree_levelorder - Traverses a binary tree using
- *		level-order traversal
- * @tree: Pointer to the root node of the tree to traverse
- * @func: Pointer to a function to call for each node
+ * binary_tree_levelorder - Goes through a binary tree
+ *                          using level-order traversal.
+ * @tree: Pointer to the root node of the tree to traverse.
+ * @func: Pointer to a function to call for each node.
  */
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
-	size_t i;
-	binary_tree_t **queue;
+	ll *children = NULL;
 
-	if (tree == NULL || func == NULL)
-        return;
+	func(tree->n);
+	children = get_children(children, tree);
+	levels_rec(children, func);
 
-	queue = malloc(sizeof(binary_tree_t *));
-	if (queue == NULL)
-	return;
+	free_list(children);
+}
 
-	queue[0] = (binary_tree_t *)tree;
-	queue[1] = NULL;
+/**
+ * levels_rec - Calls func on all nodes at each level.
+ * @head: Pointer to head of linked list with nodes at one level.
+ * @func: Pointer to a function to call for each node.
+ */
+void levels_rec(ll *head, void (*func)(int))
+{
+	ll *children = NULL, *curr = NULL;
 
-	while (queue[0]) {
-	for (i = 0; queue[i]; i++) {
-	func(queue[i]->value);
-
-	if (queue[i]->left
-	queue = binary_tree_enqueue(queue, queue[i]->left);
-
-	if (queue[i]->right)
-	queue = binary_tree_enqueue(queue, queue[i]->right);
+	if (head == NULL)
+		return;
+	for (curr = head; curr != NULL; curr = curr->next)
+	{
+		func(curr->node->n);
+		children = get_children(children, curr->node);
 	}
+	levels_rec(children, func);
+	free_list(children);
+}
 
-	free(queue);
-	queue = malloc(sizeof(binary_tree_t *));
-	if (queue == NULL)
-	return;
+/**
+ * get_children - appends children of parent to linked list.
+ * @head: Pointer to head of linked list where children will be appended.
+ * @parent: Pointer to node whose children we want to append.
+ * Return: Pointer to head of linked list of children.
+ */
+ll *get_children(ll *head, const binary_tree_t *parent)
+{
+	if (parent->left)
+		head = append(head, parent->left);
+	if (parent->right)
+		head = append(head, parent->right);
+	return (head);
+}
 
-	queue[0] = NULL;
-	queue[1] = NULL;
+/**
+ * append - adds a new node at the end of a linkedlist
+ * @head: pointer to head of linked list
+ * @btnode: const binary tree node to append
+ * Return: pointer to head, or NULL on failure
+ */
+ll *append(ll *head, const binary_tree_t *btnode)
+{
+	ll *new = NULL, *last = NULL;
+
+	new = malloc(sizeof(*new));
+	if (new)
+	{
+		new->node = btnode;
+		new->next = NULL;
+		if (head == NULL)
+			head = new;
+		else
+		{
+			last = head;
+			while (last->next)
+				last = last->next;
+			last->next = new;
+		}
 	}
+	return (head);
+}
 
-	free(queue);
+/**
+ * free_list - frees all the nodes in a linked list
+ * @head: pointer to the head of list_t linked list
+ */
+void free_list(ll *head)
+{
+	ll *ptr = NULL;
+
+	while (head)
+	{
+		ptr = head->next;
+		free(head);
+		head = ptr;
+	}
 }
