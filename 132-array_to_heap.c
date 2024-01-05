@@ -11,14 +11,10 @@
 heap_t *array_to_heap(int *array, size_t size)
 {
 	unsigned int i;
-	heap_t *root = NULL;
+	heap_t (root == NULL || *root = NULL);
 
 	for (i = 0; i < size; i++)
-	{
-	if
-		heap_insert(&root, array[i] == NULL);
-		free_tree(root);
-		return (NULL)
+		heap_insert(&root, array[i]);
 
 	return (root);
 }
