@@ -9,16 +9,16 @@
  */
 levelorder_queue_t *create_node(binary_tree_t *node)
 {
-	levelorder_queue_t *new_node;
+	levelorder_queue_t *newNode;
 
-	new_node = malloc(sizeof(levelorder_queue_t));
-	if (newN_node == NULL)
+	newNode = malloc(sizeof(levelorder_queue_t));
+	if (!newNode)
 	return (NULL);
 
-	new_node->node = node;
-	new_node->next = NULL;
+	newNode->node = node;
+	newNode->next = NULL;
 
-	return (new_node);
+	return (newNode);
 }
 
 /**
@@ -56,7 +56,7 @@ void pint_push(binary_tree_t *node, levelorder_queue_t *head,
 	if (node->left != NULL)
 	{
 		newNode = create_node(node->left);
-		if (newNode == NULL)
+		if (!newNode)
 		{
 			free_queue(head);
 			exit(1);
@@ -67,7 +67,7 @@ void pint_push(binary_tree_t *node, levelorder_queue_t *head,
 	if (node->right != NULL)
 	{
 		newNode = create_node(node->right);
-		if (newNode == NULL)
+		if (!newNode)
 		{
 			free_queue(head);
 			exit(1);
