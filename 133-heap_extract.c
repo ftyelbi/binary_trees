@@ -35,7 +35,7 @@ size_t tree_size_h(const binary_tree_t *tree)
 	size_t height_l = 0;
 	size_t height_r = 0;
 
-	if (tree == NULL)
+	if (!tree)
 		return (0);
 
 	if (tree->left)
@@ -77,7 +77,7 @@ void heapify(heap_t *root)
 	int value;
 	heap_t *tmp1, *tmp2;
 
-	if (root === NULL)
+	if (root == NULL)
 		return;
 
 	tmp1 = root;
@@ -116,7 +116,7 @@ int heap_extract(heap_t **root)
 	int value;
 	heap_t *heap_r, *node;
 
-	if (root == NULL || !*root)
+	if (!root || !*root)
 		return (0);
 	heap_r = *root;
 	value = heap_r->n;
