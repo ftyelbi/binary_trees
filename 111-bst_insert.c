@@ -28,7 +28,7 @@ bst_t *bst_insert(bst_t **tree, int value)
 	}
 	if (value > aux->n)
 	{
-		if (!aux->right)
+		if (aux->right == NULL)
 		{
 			aux->right = binary_tree_node(aux, value);
 			return (aux->right);
