@@ -16,16 +16,16 @@ int binary_tree_is_complete(const binary_tree_t *tree);
  */
 levelorder_queue_t *create_node(binary_tree_t *node)
 {
-	levelorder_queue_t *new_node;
+	levelorder_queue_t *new;
 
-	new_node = malloc(sizeof(levelorder_queue_t));
-	if (!new_node)
+	new = malloc(sizeof(levelorder_queue_t));
+	if (!new)
 		return (NULL);
 
-	new_node->node = node;
-	new_node->next = NULL;
+	new->node = node;
+	new->next = NULL;
 
-	return (new_node);
+	return (new);
 }
 
 /**
