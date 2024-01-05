@@ -58,7 +58,7 @@ void push(binary_tree_t *node, levelorder_queue_t *head,
 	levelorder_queue_t *new;
 
 	new = create_node(node);
-	if (new == NULL)
+	if (!new)
 	{
 		free_queue(head);
 		exit(1);
@@ -110,7 +110,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 				free_queue(head);
 				return (0);
 			}
-			push(head, &tail, head->node->left);
+			push(head->node->left, head, &tail);
 		}
 		else
 			flag = 1;
@@ -121,7 +121,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 				free_queue(head);
 				return (0);
 			}
-			push(head, &tail, head->node->right);
+			push(head->node->right, head, &tail);
 		}
 		else
 			flag = 1;
