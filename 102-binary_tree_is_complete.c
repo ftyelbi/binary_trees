@@ -19,7 +19,7 @@ levelorder_queue_t *create_node(binary_tree_t *node)
 	levelorder_queue_t *new;
 
 	new = malloc(sizeof(levelorder_queue_t));
-	if (new == NULL)
+	if (!new)
 		return (NULL);
 
 	new->node = node;
@@ -94,7 +94,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	levelorder_queue_t *head, *tail;
 	unsigned char flag = 0;
 
-	if (tree == NULL)
+	if (!tree)
 		return (0);
 
 	head = tail = create_node((binary_tree_t *)tree);
