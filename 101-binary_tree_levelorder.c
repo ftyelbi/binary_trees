@@ -12,7 +12,7 @@ levelorder_queue_t *create_node(binary_tree_t *node)
 	levelorder_queue_t *newNode;
 
 	newNode = malloc(sizeof(levelorder_queue_t));
-	if (!newNode)
+	if (newNode == NULL)
 	return (NULL);
 
 	newNode->node = node;
@@ -67,7 +67,7 @@ void pint_push(binary_tree_t *node, levelorder_queue_t *head,
 	if (node->right != NULL)
 	{
 		newNode = create_node(node->right);
-		if (!newNode)
+		if (newNode == NULL)
 		{
 			free_queue(head);
 			exit(1);
