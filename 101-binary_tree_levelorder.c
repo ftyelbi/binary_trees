@@ -56,7 +56,7 @@ void pint_push(binary_tree_t *node, levelorder_queue_t *head,
 	if (node->left != NULL)
 	{
 		newNode = create_node(node->left);
-		if (!newNode)
+		if (newNode == NULL)
 		{
 			free_queue(head);
 			exit(1);
@@ -100,11 +100,11 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
 	levelorder_queue_t *headLvl, *tail_lvl;
 
-	if (!tree || !func)
+	if (!tree || func == NULL)
 		return;
 
 	headLvl = tail_lvl = create_node((binary_tree_t *)tree);
-	if (!headLvl)
+	if (headLvl == NULL)
 		return;
 
 	while (headLvl != NULL)
