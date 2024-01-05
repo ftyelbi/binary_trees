@@ -13,7 +13,7 @@ avl_t *r_insert_node(avl_t **tree, avl_t *parent, avl_t **new, int nval)
 {
 	int bval;
 
-	if (*!tree)
+	if (tree == NULL || *tree == NULL)
 		return (*new = binary_tree_node(parent, nval));
 
 	if ((*tree)->n > nval)
@@ -64,7 +64,7 @@ avl_t *avl_insert(avl_t **tree, int value)
 {
 	avl_t *new = NULL;
 
-	if (*!tree)
+	if (tree == NULL || *tree == NULL)
 	{
 		*tree = binary_tree_node(NULL, value);
 		return (*tree);
